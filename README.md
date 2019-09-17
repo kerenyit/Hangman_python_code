@@ -9,3 +9,4 @@ echo 'hello world'
 echo "$VARIABLE"
 
 # b comment
+e
