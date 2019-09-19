@@ -1,5 +1,5 @@
 #hangman project - first unit.
-# wtite  the name of the game and draw the images for the wrong gusses.
+# wtite  the name of the game and draw the images for the wrong guesses.
 # limit your gusses by using randint function
 
 
