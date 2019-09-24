@@ -1,34 +1,37 @@
-# check if input is valid return boolean
-
 
 def error_check(guess_a_letter):
-    if (lnth_user_inp > 1) and (guess_a_letter in alphabet):
-        return "E1"
-    elif (lnth_user_inp == 1) and (guess_a_letter not in alphabet):
+    lnth_user_inp = len(guess_a_letter)
+    if (lnth_user_inp > 1):
+        if guess_a_letter.isalpha():
+            return "E1"
+        else:
+            return "E3"
+    elif (lnth_user_inp == 1) and guess_a_letter.isalpha() != True:
         return "E2"
-    elif (lnth_user_inp > 1) and (guess_a_letter not in alphabet):
-        return "E3"
     else:  # char input is correct
-        guess_a_letter.lower()
-        return guess_a_letter
+        letter_guessed = guess_a_letter.lower()
+        return letter_guessed
 
 
 def is_valid_input(letter_guessed):
-    # return if the input string is more than one letters.
-    if (lnth_user_inp > 1) or letter_guessed not in alphabet:
+    if letter_guessed == "E1" or letter_guessed == "E3" or letter_guessed == "E2":
         return False  # , "the string is not a valid input"
     else:
         return True  # , letter_guessed "is a valid input"
 
 
 def main():
-    #global var
-    alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
     guess_a_letter = input("Guess a letter:")
-    lnth_user_inp = len(letter_guessed)
-    is_valid = is_valid_input(guess_a_letter)
+    error = error_check(guess_a_letter)
+    is_valid = is_valid_input(error)
     print(is_valid)
 
 
 if __name__ == "__main__":
     main()
+
+"-------------------"
+test1 = main()
+test2 = main()
+test3 = main()
+test4 = main()
