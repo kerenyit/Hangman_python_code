@@ -38,8 +38,8 @@ def check_valid_input(letter_guessed, old_letters_guessed):
         return False
     else:
         if letter_guessed not in old_letters_guessed:
-            old_letters_guessed = old_letters_guessed + [letter_guessed]
-            return True
+            old_letters_guessed = old_letters_guessed.append(letter_guessed)
+            return True,
         else:
             return False
 
@@ -47,8 +47,7 @@ def check_valid_input(letter_guessed, old_letters_guessed):
 def main():
     guess_a_letter = input("Guess a letter:")
     letter_guessed = error_check(guess_a_letter)
-    old_letters_guessed = []
-    check_valid = check_valid_input(letter_guessed, old_letters_guessed)
+    check_valid = check_valid_input(letter_guessed, old_letters_guessed=[])
     print(check_valid)
 
 
