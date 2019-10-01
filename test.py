@@ -1,6 +1,4 @@
-
-# Print the Welcome Screen
-# the name of the game:
+# hangman_game works as required
 
 
 def Welcome_Screen():
@@ -11,8 +9,6 @@ def Welcome_Screen():
     MAX_TRIES= int that represent possible mistakes
     the FUNCTION print the PARAM:
      """
-    import random
-
     HANGMAN_ASCII_ART = """  _    _
  | |  | |
  | |__| | __ _ _ __   __ _ _ __ ___   __ _ _ __
@@ -24,11 +20,11 @@ def Welcome_Screen():
     print(HANGMAN_ASCII_ART)
 
     # limit gusses by using randint function
-    MAX_TRIES = random.randint(5, 8)
+    MAX_TRIES = 7
     print(MAX_TRIES)
 
 
-def choose_a_word():
+def choose_word():
     """
     this FUNCTION  ask the user to choose a text file, and an index
     to create the secret word he user will need to guess
@@ -54,8 +50,9 @@ def choose_a_word():
     if index > count:
         i_count = (i_count) % len(text_l)
         # print(i_count)
-    chosen_word = count, w[i_count]
+    # chosen_word = count, w[i_count]
     secret_word = w[i_count]
+    print("Let's play!")
     return secret_word
 
 
@@ -114,77 +111,60 @@ def print_hangman(num_of_tries):
 |      / \\
 |"""
 
-    HANGMAN_PHOTOS = {0: image1, 1: image2, 2: image3, 3: image4, 4: image5, 5: image6, 6: image7}
+    HANGMAN_PHOTOS = {1: image1, 2: image2, 3: image3, 4: image4, 5: image5, 6: image6, 7: image7}
     hangman_status = HANGMAN_PHOTOS[num_of_tries]
-    return hangman_status
+    # return hangman_status
+    print(hangman_status)
 
 
-def guess_a_word(secret_word):
-    """
-    the function return the number of charcters in a words represened by a "_"
-    """
+def empty_char(secret_word):
 
-    l_guess_word = len(secret_word)
-    empty_char_word = "_ " * l_guess_word
+    # compute the length of the word
+    length_secret_word = len(secret_word)
+    temp_string_secret_word = "_ " * length_secret_word
 
-    return empty_char_word
+# print an image of empty position based on the length of the word
+    print(temp_string_secret_word)
 
 
 def guess_a_letter():
-    """
-    the function return the charcter the user guessed
-    """
-    char = input("Guess a letter:")
-    return char
+    guessed_letter = input("Guess a letter:")
+    guessed_letter = guessed_letter.lower()
+    return guessed_letter
 
 
-def error_check(guess_a_letter):
-    """
-    pass
-    """
-    how_long = len(guess_a_letter)
-    if (how_long > 1):
-        if guess_a_letter.isalpha():
-            return "E1"
-        else:
-            return "E3"
-    elif (how_long == 1) and guess_a_letter.isalpha() != True:
-        return "E2"
-    else:  # char input is correct
-        letter_guessed = guess_a_letter.lower()
-        return letter_guessed
+def check_valid_input(guessed_letter, old_letters_guessed):
+    if guessed_letter.isalpha() != True or len(guessed_letter) > 1:
+        # print("X")
+        return False
+    elif guessed_letter in old_letters_guessed:
+        # print("X")
+        return False
+    else:
+        return True  # letter_guessed "is a valid input"
 
 
-def try_update_letter_guessed(letter_guessed, old_letters_guessed):
-    """
-    pass
-    """
-    wrong_guess = """\\    /
- \\  /
-  \\/
-  /\\
- /  \\
-/    \\"""
+def try_update_letter_guessed(guessed_letter, old_letters_guessed):
 
-    if letter_guessed == "E1" or letter_guessed == "E3" or letter_guessed == "E2":
+    if check_valid_input(guessed_letter, old_letters_guessed) == False:
         old_letters_guessed = sorted(old_letters_guessed)
         old_letters_guessed = '->'.join(old_letters_guessed)
-        print(wrong_guess)
+        print('X')
         print(old_letters_guessed)
         return False
     else:
-        if letter_guessed not in old_letters_guessed:
-            old_letters_guessed.append(letter_guessed)
-            #old_letters_guessed = old_letters_guessed
+        # letter_guessed not in old_letters_guessed:
+        old_letters_guessed.append(guessed_letter)
+        # old_letters_guessed = old_letters_guessed
+        return True
 
-            return True
-        else:
-            old_letters_guessed = sorted(old_letters_guessed)
-            old_letters_guessed = '->'.join(old_letters_guessed)
-            # old_letters
-            print(wrong_guess)
-            print(old_letters_guessed)
-            return False
+
+def is_letter_in_secret_word(guessed_letter, secret_word):
+    if guessed_letter not in secret_word:
+        print(":(")
+        return False
+    else:
+        return True
 
 
 def show_hidden_word(secret_word, old_letters_guessed):
@@ -201,20 +181,18 @@ def show_hidden_word(secret_word, old_letters_guessed):
     usability-make it clear for the user- add spaces between '_' so that he can see how many letter
     he has'nt guessed yet.
     """
-    length_of_secret_word = len(secret_word)
+    length_secret_word = len(secret_word)
 
-    string_of_secret_word = "_" * length_of_secret_word
+    string_secret_word = "_" * length_secret_word
     correct_letters = ""
 
     for char in secret_word:
         if char in old_letters_guessed:
+            correct_letters = correct_letters + char
+        else:  # char not in old_letters_guessed:
             position = secret_word.find(char)
             new_position = (position)
-            new_char = string_of_secret_word[new_position]
-            print(char, "unchanged")
-            correct_letters = correct_letters + char
-        else:
-            print(char, "-->", new_char)
+            new_char = string_secret_word[new_position]
             correct_letters = correct_letters + new_char
     correct_letters = ' '.join(correct_letters)  # for usability there is an added space
     return correct_letters
@@ -227,38 +205,48 @@ def check_win(secret_word, old_letters_guessed):
     the FUNCTION RETURN:
     TRUE= IF all the letters the user guessed is in the secret_word
         ELSE= FALSE
+
     """
+
     cnt = 0
+
     for letter in secret_word:
         if letter in old_letters_guessed:
             cnt = cnt+1
-        else:
-            cnt = cnt
     if cnt == len(secret_word):
+
         return True
     else:
         return False
 
 
 def main():
-    Welcome_Screen()
-    char_start = guess_a_word(choose_a_word())
-    # choose_a_word()
-    stat_p = 0
-    start_point = print_hangman(stat_p)
-    print(start_point)
-    print(char_start)
-    old_letters = list()
-    char_guess = error_check(guess_a_letter())
-    procces = try_update_letter_guessed(char_guess, old_letters)
-    if procces == False:
-        stat_p += 1
-        print_hangman(stat_p)
-        show_hidden_word(secret_word, old_letters)
-    if procces == True:
-        print_hangman(stat_p)
-        show_hidden_word(secret_word, old_letters)
-        check_win(secret_word, old_letters)
+    Welcome_Screen()  # 1. first print a Welcome_Screen
+    MAX_TRIES = 1
+    old_letters_guessed = list()
+    secret_word = choose_word()  # 2 . ask the player to enter a file and a number, return the secret_word
+    num_of_tries = 1
+    print_hangman(num_of_tries)  # 3
+    empty_char(secret_word)  # 4
+    while MAX_TRIES in range(7):  # 5
+        guessed_letter = guess_a_letter()  # 5.1
+        # check_valid_input(guessed_letter, old_letters_guessed)  # 5.2
+        if try_update_letter_guessed(guessed_letter, old_letters_guessed) == True:
+            if is_letter_in_secret_word(guessed_letter, secret_word) == False:  # 5.4.1
+                MAX_TRIES += 1
+                num_of_tries += 1
+                print_hangman(num_of_tries)
+                print(show_hidden_word(secret_word, old_letters_guessed))
+            else:  # MAX_TRIES == 7:
+                print(show_hidden_word(secret_word, old_letters_guessed))
+                if check_win(secret_word, old_letters_guessed) == True:
+                    print("WIN")
+                    break
+    if MAX_TRIES == 7:
+        if check_win(secret_word, old_letters_guessed) == True:
+            print("WIN")
+        else:
+            print("LOSE")
 
 
 if __name__ == "__main__":
