@@ -53,3 +53,25 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+"""def check_valid_input(guess_a_letter, letter_guessed, old_letters_guessed):
+    how_long = len(guess_a_letter)
+    wrong_guess = ""\\    /
+ \\  /
+  \\/
+  /\\
+ /  \\
+/    \\""
+    if (how_long > 1) or guess_a_letter.isalpha() != True:
+        print(wrong_guess)
+        return False
+    elif letter_guessed in old_letters_guessed:
+        print(wrong_guess)
+        return False
+    else:
+      # char input is correct
+        letter_guessed = guess_a_letter.lower()
+        old_letters_guessed = old_letters_guessed.append(letter_guessed)
+        return True
+"""

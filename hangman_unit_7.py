@@ -12,27 +12,28 @@ def show_hidden_word(secret_word, old_letters_guessed):
     usability-make it clear for the user- add spaces between '_' so that he can see how many letter
     he has'nt guessed yet.
     """
-    length_of_secret_word = len(secret_word)
+    length_secret_word = len(secret_word)
 
-    string_of_secret_word = "_" * length_of_secret_word
+    string_secret_word = "_" * length_secret_word
     correct_letters = ""
 
     for char in secret_word:
         if char in old_letters_guessed:
-            position = secret_word.find(char)
-            new_position = (position)
-            new_char = string_of_secret_word[new_position]
-            print(char, "unchanged")
             correct_letters = correct_letters + char
         else:
-            print(char, "-->", new_char)
+            # char not in old_letters_guessed:
+            position = secret_word.find(char)
+            new_position = (position)
+            new_char = string_secret_word[new_position]
             correct_letters = correct_letters + new_char
+    if char not in secret_word:
+        print(":(")
     correct_letters = ' '.join(correct_letters)  # for usability there is an added space
     return correct_letters
 
 
 secret_word = "mammals"
-old_letters_guessed = ['s', 'p', 'j', 'i', 'm', 'k']
+old_letters_guessed = ['s', 'p', 'j', 'i', 'm']
 
 
 print(show_hidden_word(secret_word, old_letters_guessed))

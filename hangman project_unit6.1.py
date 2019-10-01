@@ -32,7 +32,7 @@ def try_update_letter_guessed(letter_guessed, old_letters_guessed):
             old_letters_guessed = sorted(old_letters_guessed)
             old_letters_guessed = '->'.join(old_letters_guessed)
             # old_letters
-            print('X')
+            print(':(')
             print(old_letters_guessed)
             return False
 

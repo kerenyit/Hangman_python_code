@@ -56,7 +56,12 @@ def print_hangman(num_of_tries):
 |"""
 
     HANGMAN_PHOTOS = {0: image1, 1: image2, 2: image3, 3: image4, 4: image5, 5: image6, 6: image7}
-    print(HANGMAN_PHOTOS[num_of_tries])
+
+    if num_of_tries in HANGMAN_PHOTOS.values():
+        # if value in HANGMAN_PHOTOS.values():
+        print("x")
+        print(num_of_tries)
+    # print(HANGMAN_PHOTOS[num_of_tries])
 
 
 num_of_tries = 6
