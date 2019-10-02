@@ -13,8 +13,8 @@ def check_win(secret_word, old_letters_guessed):
     for letter in secret_word:
         if letter in old_letters_guessed:
             cnt = cnt+1
-        else:
-            cnt = cnt
+        # else:
+        #    cnt = cnt
     if cnt == len(secret_word):
         return True
     else:

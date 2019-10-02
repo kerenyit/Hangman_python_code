@@ -16,17 +16,18 @@ def Welcome_Screen():
 
 
 def choose_word():
-    """Choose a word from user input text file.
+    """The function return a word from user input text file.
 
     This function ask the user to enter a file name and a number.
-    It uses the try/except statement to check if the user enterd
-    a valid input. If not it print a message on the screen, and ask
-    the user to enter it again.
-    When the input is correct it assignd to a variable fhand and index.
-    It iterates over the lines of the file and selects a word in
-    the position of given index.
-    This function ask the user to enter a file name and a number.
-    then selects a word from a file_path by its index position
+    The file name is a string representing a path to a text file that
+    contains spaces separated by words, and the number is an integer
+    representing a particular word's placement in the file.
+    The function uses the try/except statement to check if the user enterd
+    a valid input. If the input is not valid, it print a message to the user
+    and continue the procces until the input is correct.
+    When the input is correct it assignd to a variables fhand for the string
+    and index for integer. It iterates over the lines of the file and
+    selects a word in the position of given index.
     :return: The result is a word from the file in the place of the index.
     :rtype: str
     """
@@ -63,7 +64,7 @@ def choose_word():
     if index > count:
         i_count = (i_count) % len(lines_l)  # circular count
     secret_word = words_l[i_count]
-    print("Getting started...let's play!")
+    print("Are you ready?......let's play!")
     return secret_word
 
 
@@ -72,7 +73,7 @@ def print_hangman(num_of_tries):
 
     This function gets the key- num_of_tries and print back it value.
 
-    :param num_of_tries: num_of_tries is a key for dict(HANGMAN_PHOTOS)
+    :param num_of_tries: num_of_tries is a key for the dict(HANGMAN_PHOTOS)
     :type num_of_tries: int
     :return: None
     """
@@ -152,13 +153,16 @@ def guess_a_letter():
 
 
 def check_valid_input(guessed_letter, old_letters_guessed):
-    """Check if the input in English and only 1 character long
+    """Check the correctness of the input and whether it is legal to guess this signal.
 
-    :param guessed_letter:A charcter value `guessed_letter`
+    The function receives a character and a list of letters that the user has previously
+    guessed. The function checks if the input is in English and only 1 character long
+    and whether the user has not guessed this signal before.
+    :param guessed_letter:The string represents the character received from the user.
     :type guessed_letter: str
-    :param old_letters_guessed: old_letters_guessed value.
+    :param old_letters_guessed: The list contains the letters the player has guessed so far.
     :type old_letters_guessed: list
-    :return: True or False
+    :return: return True if it is a legal input, else return False
     :rtype: bool
     """
     if guessed_letter.isalpha() != True or len(guessed_letter) > 1:
@@ -172,13 +176,14 @@ def check_valid_input(guessed_letter, old_letters_guessed):
 def try_update_letter_guessed(guessed_letter, old_letters_guessed):
     """The function update old_letters_guessed list .
 
-    This function uses the function check_valid_input() to update
-    the character in old_letters_guessed list. If it false print
-    a "X" to the user and also print a sorted string of
-    old_letters_guessed list.
-    :param guessed_letter: A charcter value `guessed_letter`
+    This function uses the function check_valid_input() to know if
+    the character is incorrect and not previously guessed or the
+    character is invalid and / or already in the guess list.
+    If it false print "X" to the user and also print a sorted string made from
+    old_letters_guessed character.
+    :param guessed_letter: The string represents the character received from the user.
     :type guessed_letter: str
-    :param old_letters_guessed: old_letters_guessed value.
+    :param old_letters_guessed: The list contains the letters the player has guessed so far.
     :type old_letters_guessed: list
     :return: returns False if it already exist or if check_valid_input is False, else returns True.
     :rtype: bool
@@ -198,7 +203,7 @@ def try_update_letter_guessed(guessed_letter, old_letters_guessed):
 def is_letter_in_secret_word(guessed_letter, secret_word):
     """Check if guessed_letter in secret_word.
 
-    :param guessed_letter:A charcter value `guessed_letter`.
+    :param guessed_letter: The string represents the character received from the user.
     :type guessed_letter: str
     :param secret_word: A word that the user try to guess `secret_word`.
     :type secret_word: str
@@ -213,12 +218,12 @@ def is_letter_in_secret_word(guessed_letter, secret_word):
 
 
 def show_hidden_word(secret_word, old_letters_guessed):
-    """ show correct letters outline of secret_word.
+    """ The function returns a string consisting of letters and underscores.
 
-    If the guess was correct, replace "_" index  withh the correct letter of the secret_word.
+
     :param secret_word: A word that the user try to guess `secret_word`.
     :type secret_word: str
-    :param old_letters_guessed: List containing all the letter the user already tried to guss `old_letters_guessed`.
+    :param old_letters_guessed: The list contains the letters the player has guessed so far.
     :type old_letters_guessed: str
     :return: The letters that was guessed and '_' string combind together and return both as a new it as a new correct_letters string.
     :rtype: str
@@ -242,13 +247,13 @@ def show_hidden_word(secret_word, old_letters_guessed):
 
 
 def check_win(secret_word, old_letters_guessed):
-    """Short summary.
+    """Check if all the letters that compose secret_word are included old_letters_guessed list.
 
     :param secret_word: The word that the user try to guess `secret_word`
     :type secret_word: str
-    :param old_letters_guessed: List containing all the letter the user already tried to guess `old_letters_guessed`.
+    :param The list contains the letters the player has guessed so far.: The list contains the letters the player has guessed so far.
     :type old_letters_guessed: list
-    :return: TRUE if all the letters guessed by the user is in the secret_word, else return false.
+    :return: Return True if all the letters guessed by the user is in the secret_word, else return false.
     :rtype: bool
     """
     cnt = 0
@@ -262,6 +267,10 @@ def check_win(secret_word, old_letters_guessed):
 
 
 def main():
+    """This is a hangman game.
+
+
+    """
     Welcome_Screen()
     wrong_guess = 1
     num_of_tries = 1
