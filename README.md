@@ -16,7 +16,7 @@ This is the instruction for coding a game of  **Hangmam**  in *python*.
 
 4. underneath the image of the hangman. show the status of the secret_word
    in blank lines.
-   - def guess_a_word(secret_word) ***maybe change it to blank_word***.
+   - def guess_a_word(secret_word) 
 
 5. ask the player to enter *1* character in English each round.
     - def guess_a_letter(): *this should be a while loop*
@@ -25,18 +25,18 @@ This is the instruction for coding a game of  **Hangmam**  in *python*.
 - 5.1. if the character isn't correct *or* was guessed before
         print *"x"*, and the string of old_letters_guessed. and ask the player to enter another character.
         - def error_check(guess_a_letter): *only* if its not in English
-        and over one character *need to fix this*
+        and over one character 
 
 
-- 5.2. if the  player enter *only one character is in English*
+- 5.2. if the  player enter a charcer (only one character is in English)
         check if it is a correct guess or wrong one.
         - def show_hidden_word(secret_word, old_letters_guessed):
-         *need to fix this code*
+         
 
     - 5.2.1  if the guess was correct. show the player the outline of
             the secret_word with the character and blank line.
             - def show_hidden_word(secret_word, old_letters_guessed):
-            *old_letters_guessed should be update in 5.2 stage*
+            
 
     - 5.2.2 if the guess was wrong. print the *"):"* and underneath
             an image of the hangman status according to his number of wrong guesses.
@@ -47,6 +47,6 @@ This is the instruction for coding a game of  **Hangmam**  in *python*.
       before he ran out of wrong guesses. or print *"LOSE"*
       in case he maxed our his wrong guesses and didnt gussed the word.
       - def check_win(secret_word, old_letters_guessed):
-        *need to update this code- maybe compare in to len secret word*
+       
 
 ------------------------------------------------------------------------------------
