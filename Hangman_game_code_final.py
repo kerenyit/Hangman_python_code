@@ -31,6 +31,7 @@ def choose_word():
     :return: The result is a word from the file in the place of the index.
     :rtype: str
     """
+
     while True:  # check if user input correct
         try:
             file_path = input("Enter a file name:")
@@ -71,8 +72,8 @@ def choose_word():
 def print_hangman(num_of_tries):
     """Prints the value from dict(HANGMAN_PHOTOS).
 
-    This function gets the key- num_of_tries and print back it value.
-
+    This function recive an integer that uses as a key for
+    the dict(HANGMAN_PHOTOS) and print back it value.
     :param num_of_tries: num_of_tries is a key for the dict(HANGMAN_PHOTOS)
     :type num_of_tries: int
     :return: None
@@ -126,7 +127,7 @@ def empty_char(secret_word):
 
     The function calculate the length of the secret_word,
     and returns a 'blank' string of the same length using "_"
-    :param secret_word: secret_word value.
+    :param secret_word: That's the word the user has to guess `secret_word`.
     :type secret_word: str
     :return: A blank_secret_word
     :rtype: str
@@ -165,6 +166,7 @@ def check_valid_input(guessed_letter, old_letters_guessed):
     :return: return True if it is a legal input, else return False
     :rtype: bool
     """
+
     if guessed_letter.isalpha() != True or len(guessed_letter) > 1:
         return False
     elif guessed_letter in old_letters_guessed:
@@ -192,8 +194,8 @@ def try_update_letter_guessed(guessed_letter, old_letters_guessed):
     if check_valid_input(guessed_letter, old_letters_guessed) == False:
         old_letters_guessed = sorted(old_letters_guessed)
         old_letters_guessed = '->'.join(old_letters_guessed)
-        print('X')
-        print(old_letters_guessed)
+        print("\033[1;31;40m", 'X')  # print 'x' in a Bright Red colour.
+        print("\033[0;37;40m ", old_letters_guessed)  # print regular text colour.
         return False
     else:
         old_letters_guessed.append(guessed_letter)
@@ -205,11 +207,12 @@ def is_letter_in_secret_word(guessed_letter, secret_word):
 
     :param guessed_letter: The string represents the character received from the user.
     :type guessed_letter: str
-    :param secret_word: A word that the user try to guess `secret_word`.
+    :param secret_word: That's the word the user has to guess `secret_word`.
     :type secret_word: str
     :return: returns False if charcter value is not in secret_word, else returns True.
     :rtype: type
     """
+
     if guessed_letter not in secret_word:
         print(":(")
         return False
@@ -220,12 +223,11 @@ def is_letter_in_secret_word(guessed_letter, secret_word):
 def show_hidden_word(secret_word, old_letters_guessed):
     """ The function returns a string consisting of letters and underscores.
 
-
-    :param secret_word: A word that the user try to guess `secret_word`.
+    :param secret_word: That's the word the user has to guess `secret_word`.
     :type secret_word: str
     :param old_letters_guessed: The list contains the letters the player has guessed so far.
     :type old_letters_guessed: str
-    :return: The letters that was guessed and '_' string combind together and return both as a new it as a new correct_letters string.
+    :return: reveal the secret word to the player in a lower-line structure
     :rtype: str
     """
 
@@ -249,13 +251,14 @@ def show_hidden_word(secret_word, old_letters_guessed):
 def check_win(secret_word, old_letters_guessed):
     """Check if all the letters that compose secret_word are included old_letters_guessed list.
 
-    :param secret_word: The word that the user try to guess `secret_word`
+    :param secret_word: That's the word the user has to guess `secret_word`.
     :type secret_word: str
     :param The list contains the letters the player has guessed so far.: The list contains the letters the player has guessed so far.
     :type old_letters_guessed: list
     :return: Return True if all the letters guessed by the user is in the secret_word, else return false.
     :rtype: bool
     """
+
     cnt = 0
     for letter in secret_word:
         if letter in old_letters_guessed:
@@ -267,10 +270,20 @@ def check_win(secret_word, old_letters_guessed):
 
 
 def main():
-    """This is a hangman game.
+    """This is a standart game of hangman.
 
-
+    The function print a welcome screen, and than ask the player to enter
+    (a) a word file path and (b) a location (index) for a word in the file.
+    According to the player's input, the secret word for the game will be selected.
+    Ask the player to enter one character input per round.
+    After every good guess, introduce the secret word to the player in a
+    lower-line structure. In case of a failed guess. Print the player the
+    output ":(" and below it print a picture of the man hanging in the "advanced" mode.
+    End of game:
+    If the player guessed the whole word correctly - print to the WIN screen.
+    If the player guessed seven failed attempts - print to the LOSE screen.
     """
+
     Welcome_Screen()
     wrong_guess = 1
     num_of_tries = 1
@@ -289,11 +302,13 @@ def main():
             else:
                 print(show_hidden_word(secret_word, old_letters_guessed))
                 if check_win(secret_word, old_letters_guessed) == True:
-                    print("WIN")
+                    print("\033[1;32;40m", "WIN")  # print text in Bright Green colour.
+                    print("\033[0;37;40m ")  # return to regular text colour.
                     break
     if wrong_guess == 7:
         if check_win(secret_word, old_letters_guessed) == True:
-            print("WIN")
+            print("\033[1;32;40m", "WIN")  # print text in  Bright Green colour
+            print("\033[0;37;40m ")  # return to regular text colour.
         else:
             print("LOSE")
 
