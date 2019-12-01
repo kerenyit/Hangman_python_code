@@ -1,8 +1,12 @@
-## **Hangmam**
+## **Hangman- python**
 
-This is the instruction for coding a game of  **Hangmam**  in *python*.
+This is a simple Hangman game written in python. This project was made as the final assignment in a self.py course.
 
-#Getting Started
+**Requirments**
+Python 3.
+
+**Psuedo code**
+This is the psuedo code I created for the game:
 
 1. first print a Welcome_Screen
     - def Welcome_Screen():with the name of the game and number of possible wrong answers.
@@ -49,4 +53,3 @@ This is the instruction for coding a game of  **Hangmam**  in *python*.
       - def check_win(secret_word, old_letters_guessed):
        
 
-------------------------------------------------------------------------------------
